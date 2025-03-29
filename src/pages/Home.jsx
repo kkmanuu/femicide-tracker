@@ -108,9 +108,7 @@ const Home = ({ user }) => {
             <Button variant="primary" size="lg" className="px-4 me-2" onClick={handleGetStarted}>
               Get Started
             </Button>
-            <Button variant="outline-light" size="lg" className="px-4" onClick={() => navigate('/about')}>
-              Learn More
-            </Button>
+            
           </div>
         </Container>
       </div>
