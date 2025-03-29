@@ -3,6 +3,7 @@ import { getFemicides } from '../api/api';
 import FemicideChart from '../components/FemicideChart';
 import DataTable from '../components/DataTable';
 import CaseForm from '../components/CaseForm';
+
 import { Spinner, Alert } from 'react-bootstrap'; // Added missing imports
 
 const Dashboard = ({ user }) => {
