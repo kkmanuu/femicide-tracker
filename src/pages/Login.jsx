@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { login } from '../api/api';
 import AuthForm from '../components/AuthForm';
-import { Alert, Spinner } from 'react-bootstrap';
+import { Alert, Spinner, Container, Card, Button } from 'react-bootstrap';
 
 const Login = ({ onLogin }) => {
   const [error, setError] = useState('');
@@ -26,9 +26,9 @@ const Login = ({ onLogin }) => {
   };
 
   return (
-    <div className="auth-container">
-      <div className="auth-card">
-        <h2 className="text-center mb-4">Login</h2>
+    <Container className="d-flex justify-content-center align-items-center vh-100">
+      <Card className="p-4 shadow-lg" style={{ width: '100%', maxWidth: '400px' }}>
+        <h2 className="text-center mb-4 text-primary">Login</h2>
         
         {error && (
           <Alert variant="danger" className="mb-3">
@@ -43,10 +43,10 @@ const Login = ({ onLogin }) => {
         />
 
         <div className="text-center mt-3">
-          Don't have an account? <a href="/signup">Sign up</a>
+          Don't have an account? <a href="/signup" className="text-primary fw-bold">Sign up</a>
         </div>
-      </div>
-    </div>
+      </Card>
+    </Container>
   );
 };
 
