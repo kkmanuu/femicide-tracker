@@ -1,11 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import logo from '../images/demo.webp'; // Import the logo
 
 const Navbar = ({ isAuthenticated, user, onLogout }) => {
   return (
     <nav className="navbar">
       <div className="navbar-brand">
-        <Link to="/">Femicide Tracker Kenya</Link>
+        <Link to="/">
+          <img src={logo} alt="Femicide Tracker Kenya Logo" className="navbar-logo" />
+        </Link>
+        <Link to="/" className="navbar-title">Femicide Tracker Kenya</Link>
       </div>
       <div className="navbar-links">
         <Link to="/">Home</Link>
