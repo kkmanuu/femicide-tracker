@@ -36,6 +36,12 @@ body {
   font-weight: bold;
 }
 
+.navbar-logo {
+  width: 50px; /* Adjust size */
+  height: auto;
+  margin-right: 10px;
+}
+
 .navbar-links {
   display: flex;
   gap: 1.5rem;
