@@ -6,6 +6,20 @@
       "password": "555555",
       "name": "monik",
       "createdAt": "2025-03-28T22:39:46.610Z"
+    },
+    {
+      "id": 1743209301161,
+      "username": "Emmanuel kipngeno",
+      "password": "444444",
+      "name": "Emmanuel kipngeno",
+      "createdAt": "2025-03-29T00:48:21.161Z"
+    },
+    {
+      "id": 1743211390644,
+      "username": "joseph",
+      "password": "kkkkkk",
+      "name": "joseph",
+      "createdAt": "2025-03-29T01:23:10.644Z"
     }
   ],
   "femicides": [
