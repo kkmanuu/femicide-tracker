@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:3001';
+const API_URL = 'http://localhost:5000/api/'; // Adjust according to backend port and route
 
 const api = axios.create({
   baseURL: API_URL,
@@ -11,89 +11,60 @@ const api = axios.create({
 // User Authentication
 export const login = async (credentials) => {
   try {
-    const { data: users } = await api.get(`/users?username=${encodeURIComponent(credentials.username)}`);
-    const user = users[0];
-    
-    if (!user) throw new Error('User not found');
-    if (user.password !== credentials.password) throw new Error('Incorrect password');
-    
-    localStorage.setItem('authToken', 'simulated-token');
-    localStorage.setItem('currentUser', JSON.stringify(user));
-    
-    return user;
+    const { data } = await api.post('/auth/login', credentials);
+    localStorage.setItem('authToken', data.token);
+    localStorage.setItem('currentUser', JSON.stringify(data));
+    return data;
   } catch (error) {
-    throw new Error(`Login failed: ${error.message}`);
+    throw new Error(`Login failed: ${error.response?.data?.error || error.message}`);
   }
 };
 
 export const register = async (userData) => {
   try {
-    if (!userData.username || !userData.password) throw new Error('Username and password required');
-    if (userData.password.length < 6) throw new Error('Password must be 6+ characters');
-    if (userData.password !== userData.confirmPassword) throw new Error('Passwords do not match');
-
-    const { data: existing } = await api.get(`/users?username=${encodeURIComponent(userData.username)}`);
-    if (existing.length > 0) throw new Error('Username exists');
-
-    const newUser = {
-      id: Date.now(),
-      username: userData.username,
-      password: userData.password,
-      name: userData.name || userData.username,
-      createdAt: new Date().toISOString()
-    };
-
-    const { data: savedUser } = await api.post('/users', newUser);
-    localStorage.setItem('authToken', 'simulated-token');
-    localStorage.setItem('currentUser', JSON.stringify(savedUser));
-    
-    return savedUser;
+    const { data } = await api.post('/auth/register', userData);
+    localStorage.setItem('authToken', data.token);
+    localStorage.setItem('currentUser', JSON.stringify(data));
+    return data;
   } catch (error) {
-    throw new Error(`Registration failed: ${error.message}`);
+    throw new Error(`Registration failed: ${error.response?.data?.error || error.message}`);
   }
 };
 
-// Femicide Data Operations
+// Femicides Data Operations
+// Get Femicides
 export const getFemicides = async () => {
   try {
     const { data } = await api.get('/femicides');
-    return data;
+    return data;  // Ensure the response is in the correct format
   } catch (error) {
-    throw new Error(`Failed to fetch cases: ${error.message}`);
+    throw new Error('Error fetching femicides: ' + error.response?.data?.error || error.message);
   }
 };
 
-export const addFemicide = async (caseData, userId) => {
+// Add a new Femicide case
+export const addFemicide = async (caseData) => {
   try {
-    const requiredFields = ['county', 'age', 'date', 'perpetrator', 'weapon'];
-    const missingFields = requiredFields.filter(field => !caseData[field]);
-    
-    if (missingFields.length > 0) {
-      throw new Error(`Missing fields: ${missingFields.join(', ')}`);
-    }
-
-    const newCase = {
-      ...caseData,
-      id: Date.now(),
-      reportedBy: userId,
-      createdAt: new Date().toISOString()
-    };
-    
-    const { data } = await api.post('/femicides', newCase);
+    const token = localStorage.getItem('authToken');
+    const { data } = await api.post('/cases', caseData, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
     return data;
   } catch (error) {
-    throw new Error(`Failed to add case: ${error.message}`);
+    throw new Error(`Failed to add case: ${error.response?.data?.error || error.message}`);
   }
 };
 
 // Metadata for forms
 export const getMetadata = async () => {
-  return {
-    counties: ["Nairobi", "Mombasa", "Kisumu"],
-    perpetrators: ["Partner", "Ex-partner", "Family member"],
-    weapons: ["Knife", "Gun", "Blunt object"]
-  };
+  try {
+    const { data } = await api.get('/metadata');
+    return data;
+  } catch (error) {
+    throw new Error(`Failed to fetch metadata: ${error.response?.data?.error || error.message}`);
+  }
 };
+
 
 // Utility functions
 export const logout = () => {

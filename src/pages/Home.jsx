@@ -11,6 +11,7 @@ const Home = ({ user }) => {
     } else {
       navigate('/login');
     }
+    
   };
 
   return (

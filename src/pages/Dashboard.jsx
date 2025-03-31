@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { getFemicides } from '../api/api';
+import { getFemicides } from '../api/api'; // Updated import for axios-based API functions
 import FemicideChart from '../components/FemicideChart';
 import DataTable from '../components/DataTable';
 import CaseForm from '../components/CaseForm';
-
-import { Spinner, Alert } from 'react-bootstrap'; // Added missing imports
+import { Spinner, Alert } from 'react-bootstrap';
 
 const Dashboard = ({ user }) => {
   const [femicides, setFemicides] = useState([]);
@@ -14,10 +13,11 @@ const Dashboard = ({ user }) => {
   useEffect(() => {
     const loadData = async () => {
       try {
-        const data = await getFemicides();
+        const data = await getFemicides(); // Now using the updated getFemicides function
         setFemicides(data);
       } catch (err) {
         setError('Failed to load data');
+        console.error('Error fetching femicides:', err);
       } finally {
         setLoading(false);
       }
@@ -46,7 +46,11 @@ const Dashboard = ({ user }) => {
         </div>
       </div>
 
-      <DataTable data={femicides} />
+      <div className="row">
+        <div className="col-md-12">
+          <DataTable data={femicides} />
+        </div>
+      </div>
     </div>
   );
 };
