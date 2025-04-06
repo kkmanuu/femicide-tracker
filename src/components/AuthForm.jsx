@@ -1,18 +1,18 @@
-import React from 'react';
-import { Form, Button, Spinner } from 'react-bootstrap';
+import React from "react";
+import { Form, Button, Spinner } from "react-bootstrap";
 
 const AuthForm = ({ isLogin, onSubmit, loading }) => {
   const [formData, setFormData] = React.useState({
-    username: '',
-    password: '',
-    ...(!isLogin && { confirmPassword: '' })
+    username: "",
+    password: "",
+    ...(!isLogin && { confirmPassword: "" }),
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ 
-      ...prev, 
-      [name]: value 
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
     }));
   };
 
@@ -58,23 +58,33 @@ const AuthForm = ({ isLogin, onSubmit, loading }) => {
             required
           />
           {formData.password && formData.confirmPassword && (
-            <Form.Text className={formData.password === formData.confirmPassword ? 'text-success' : 'text-danger'}>
-              {formData.password === formData.confirmPassword ? 'Passwords match' : 'Passwords do not match'}
+            <Form.Text
+              className={
+                formData.password === formData.confirmPassword
+                  ? "text-success"
+                  : "text-danger"
+              }
+            >
+              {formData.password === formData.confirmPassword
+                ? "Passwords match"
+                : "Passwords do not match"}
             </Form.Text>
           )}
         </Form.Group>
       )}
 
-      <Button 
-        variant="primary" 
-        type="submit" 
+      <Button
+        variant="primary"
+        type="submit"
         disabled={loading}
         className="w-100"
       >
         {loading ? (
           <Spinner animation="border" size="sm" />
+        ) : isLogin ? (
+          "Login"
         ) : (
-          isLogin ? 'Login' : 'Sign Up'
+          "Sign Up"
         )}
       </Button>
     </Form>
