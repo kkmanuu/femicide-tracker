@@ -16,7 +16,7 @@ const Footer = () => {
             <p className="text-white py-2">
               Femicide Tracker Kenya is dedicated to monitoring and analyzing
               femicide cases to raise awareness and advocate for change against
-              gender-based violence.
+              gender-based violence. 
             </p>
           </Col>
 
