@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getFemicides } from "../api/api"; // Updated import for axios-based API functions
+import { getFemicides } from "../api/api";
 import FemicideChart from "../components/FemicideChart";
 import DataTable from "../components/DataTable";
 import CaseForm from "../components/CaseForm";
@@ -13,7 +13,7 @@ const Dashboard = ({ user }) => {
   useEffect(() => {
     const loadData = async () => {
       try {
-        const data = await getFemicides(); // Now using the updated getFemicides function
+        const data = await getFemicides();
         setFemicides(data);
       } catch (err) {
         setError("Failed to load data");
