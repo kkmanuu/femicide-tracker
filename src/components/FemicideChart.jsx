@@ -20,7 +20,7 @@ ChartJS.register(
 );
 
 const FemicideChart = ({ data }) => {
-  // Process data to count cases by county
+  // Process data to count cases by county 
   const countyCounts = data.reduce((acc, caseItem) => {
     acc[caseItem.county] = (acc[caseItem.county] || 0) + 1;
     return acc;
