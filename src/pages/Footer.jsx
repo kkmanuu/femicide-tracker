@@ -36,6 +36,7 @@ const Footer = () => {
                 >
                   📊 Dashboard
                 </Link>
+                
               </li>
               <li>
                 <Link to="/Help" className="text-white text-decoration-none">
