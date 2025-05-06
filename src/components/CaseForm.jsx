@@ -31,6 +31,7 @@ const CaseForm = ({ userId, onCaseAdded }) => {
       description: caseData.description.trim(),
     };
 
+    
     console.log("Trimmed Form Data Before Submit:", trimmedData); // Debug log
 
     if (
