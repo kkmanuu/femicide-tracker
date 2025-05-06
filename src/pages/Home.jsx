@@ -12,6 +12,7 @@ const Home = ({ user }) => {
       navigate("/login");
     }
   };
+''
 
   return (
     <div
