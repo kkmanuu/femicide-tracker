@@ -73,6 +73,7 @@ const AuthForm = ({ isLogin, onSubmit, loading }) => {
         </Form.Group>
       )}
 
+
       <Button
         variant="primary"
         type="submit"
