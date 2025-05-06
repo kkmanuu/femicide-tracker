@@ -1,6 +1,7 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 
+
 const DataTable = ({ data }) => {
   return (
     <div className="container mt-4">
