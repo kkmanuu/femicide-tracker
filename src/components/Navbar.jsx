@@ -16,6 +16,7 @@ const Navbar = ({ isAuthenticated, user, onLogout }) => {
         <Link to="/" className="navbar-title">
           Femicide Tracker Kenya
         </Link>
+        
       </div>
       <div className="navbar-links">
         <Link to="/">Home</Link>
