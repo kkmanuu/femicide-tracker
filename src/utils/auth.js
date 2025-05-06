@@ -5,8 +5,6 @@ export const checkAuth = async () => {
   const user = JSON.parse(localStorage.getItem("user"));
 
   if (!token || !user) return { isAuthenticated: false };
-
-  // In a real app, you would verify the token with your backend
   return { isAuthenticated: true, user };
 };
 
